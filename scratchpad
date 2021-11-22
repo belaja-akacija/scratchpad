@@ -1,0 +1,72 @@
+#!/bin/bash
+##
+## Author: Belaja-akacija
+## Version: 0.1
+##
+## Description:
+## Launch a scratchpad for me in vim, based on the current date.
+## If the current date file already exists, then just open that file.
+## Automatically, the reminders from the previous day will be at the top of the file.
+## Trying to write the script as modularly as possible, so new features can be patched in easily.
+##
+## TODO:
+## Directory structure by month
+## Add persistence of reminders, denoted by [!] at the end of an entry
+## Maybe be able to chain together flags, something like e.g. [!*] -- pin this reminder to the very top; and other subtle quality of life fixes.
+
+DATE=$(date +"%d-%m-%Y")
+YESTERDAY=$(date +"%d-%m-%Y" --date="yesterday")
+TEMP="/tmp/$YESTERDAY.tmp"
+touch "$TEMP"
+DIR=$HOME/Documents/Personal/Scratchpad
+REMINDER=$(grep -E "\[\+\]$" "$DIR/$YESTERDAY" 2>/dev/null)
+echo "$REMINDER" > $TEMP
+REPLACER=$(sed -i "s/\[+\]/\[\?\]/g" "$TEMP")
+
+GiveReminder(){
+  if test -f "$DIR/$DATE"; then
+
+    if [[ $(sed -n 1p "$DIR/$DATE") != "+----------------+" ]]; then # First prepend in the previous day's reminders
+
+    echo "+----------------+
+Yesterday's reminders:
+$(cat $TEMP)
++----------------+
+
+$(cat $DIR/$DATE)" > $DIR/$DATE
+
+else
+  OpenScratchpad
+
+  exit 0
+  fi
+  OpenScratchpad
+  fi
+
+  exit 0
+}
+
+OpenScratchpad(){
+  nvim -c "Goyo" "$DIR/$DATE" # Open the current day's scratchpad in neovim
+
+  exit 0
+}
+
+
+Init(){
+if test -f "$DIR/$DATE"; then
+  GiveReminder
+else
+  touch $DIR/$DATE
+  GiveReminder
+fi
+}
+
+if test -d "$DIR"; then
+  Init
+else
+  mkdir -p -v "$DIR"
+  Init
+fi
+
+exit 0
