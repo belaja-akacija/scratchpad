@@ -7,9 +7,11 @@ DEP_CHECK(){
   if ! [[ "$(command -v nvim)" ]];
   then
     echo "I need nvim or vim to work! Neovim not found, checking for vim..."
-  elif ! [[ "$(command -v nvim)" ]]; then
-    echo "Vim not found! Please install either vim or neovim.  Aborting."
-    exit 1
+    if ! [[ "$(command -v vim)" ]];
+    then
+      echo "Vim not found! Please install either vim or neovim.  Aborting."
+      exit 1
+    fi
   else
     echo "Dependency check OK."
     INSTALLER
