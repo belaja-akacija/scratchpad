@@ -19,7 +19,7 @@ YESTERDAY=$(date +"%d-%m-%Y" --date="yesterday")
 TEMP="/tmp/$YESTERDAY.tmp"
 touch "$TEMP"
 CURR_MONTH=$(date +"%B")
-DIR=$HOME/Documents/Personal/$CURR_MONTH
+DIR=$HOME/.local/share/scratchpad/$CURR_MONTH
 REMINDER=$(grep -E "\[\+\]$" "$DIR/$YESTERDAY" 2>/dev/null)
 echo "$REMINDER" > $TEMP
 REPLACER=$(sed -i "s/\[+\]/\[\?\]/g" "$TEMP")
