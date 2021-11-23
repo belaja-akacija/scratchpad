@@ -13,6 +13,7 @@
 ## Directory structure by month
 ## Add persistence of reminders, denoted by [!] at the end of an entry
 ## Maybe be able to chain together flags, something like e.g. [!*] -- pin this reminder to the very top; and other subtle quality of life fixes.
+## Check the state of the header in the current scratchpad and compare it to the previous day's reminders. Overwrite if doesn't match.
 
 DATE=$(date +"%d-%m-%Y")
 YESTERDAY=$(date +"%d-%m-%Y" --date="yesterday")
@@ -27,47 +28,47 @@ REPLACER=$(sed -i "s/\[+\]/\[\?\]/g" "$TEMP")
 GiveReminder(){
   if test -f "$DIR/$DATE"; then
 
-    if [[ $(sed -n 1p "$DIR/$DATE") != "+----------------+" ]]; then # First prepend in the previous day's reminders
+    if [[ $(sed -n 1p "$DIR/$DATE") != "+--------------------+" ]]; then # First prepend in the previous day's reminders
 
-    echo "+----------------+
+       echo "+--------------------+
 Yesterday's reminders:
+
 $(cat $TEMP)
-+----------------+
++--------------------+
 
 $(cat $DIR/$DATE)" > $DIR/$DATE
+      else
+        OpenScratchpad
 
-else
-  OpenScratchpad
-
-  exit 0
-  fi
-  OpenScratchpad
+        exit 0
+    fi
+    OpenScratchpad
   fi
 
   exit 0
 }
 
 OpenScratchpad(){
-  nvim -c "Goyo" "$DIR/$DATE" # Open the current day's scratchpad in neovim
+  if ! [[ "$(command -v nvim)" ]]; then
+    vim -c "Goyo" "$DIR/$DATE"
+  else
+    nvim -c "Goyo" "$DIR/$DATE" # Open the current day's scratchpad in neovim
+  fi
 
   exit 0
 }
 
 
 Init(){
-if test -f "$DIR/$DATE"; then
+  if ! test -f "$DIR/$DATE"; then
+    touch $DIR/$DATE
+  fi
   GiveReminder
-else
-  touch $DIR/$DATE
-  GiveReminder
-fi
 }
 
-if test -d "$DIR"; then
-  Init
-else
+if ! test -d "$DIR"; then
   mkdir -p -v "$DIR"
-  Init
 fi
+Init
 
 exit 0
