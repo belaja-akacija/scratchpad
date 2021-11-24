@@ -7,7 +7,7 @@ Just simply type ```scratchpad``` in a terminal to pull up the current day's scr
 If you use dwm, you can insert these lines into ```config.def.h```:
 ```
 /*commands*/
-static const char *scratchpad[] = { "<YOUR TERMINAL EMULATOR>", "-e", "sh", "-c", "<ABSOLUTE PATH TO scratchpad FILE; sh", NULL };
+static const char *scratchpad[] = { "<YOUR TERMINAL EMULATOR>", "-e", "sh", "-c", "<ABSOLUTE PATH TO scratchpad FILE>; sh", NULL };
 
 /*Keys*/
 { MODKEY,                       XK_p,      spawn,          {.v = scratchpad} },
