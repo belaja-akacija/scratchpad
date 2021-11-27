@@ -24,6 +24,11 @@ INSTALLER(){
 }
 
 INIT(){
+  if [[ -d $HOME/bin ]]; then
+    echo "$HOME/bin exists"
+  else
+    mkdir $HOME/bin
+  fi
   DEP_CHECK
 }
 INIT
