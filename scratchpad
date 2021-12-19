@@ -18,12 +18,42 @@
 DATE=$(date +"%d-%m-%Y")
 YESTERDAY=$(date +"%d-%m-%Y" --date="yesterday")
 TEMP="/tmp/$YESTERDAY.tmp"
+PERM="$HOME/.local/share/scratchpad/data"
 touch "$TEMP"
 CURR_MONTH=$(date +"%B")
 DIR=$HOME/.local/share/scratchpad/$CURR_MONTH
 REMINDER=$(grep -E "\[\+\]$" "$DIR/$YESTERDAY" 2>/dev/null)
+PERSISTENCE=$(grep -E "\[\!\]$" "$DIR/$YESTERDAY" 2>/dev/null)
+echo "$PERSISTENCE" > $PERM
 echo "$REMINDER" > $TEMP
 REPLACER=$(sed -i "s/\[+\]/\[\?\]/g" "$TEMP")
+
+# Fix the persistence
+# Init > GiveReminder > Persist > OpenScratchpad
+# Current issue: SUPER RECURSION WHYYYY
+Persist()
+{
+  if ! test -d "$PERM"; then
+    mkdir -p -v $PERM
+    touch $PERM/persist 2>/dev/null
+  fi
+
+  if test -f "$DIR/$DATE"; then
+      echo "+--------------------+
+Persistant Reminders:
+
+$(cat $PERM)
+
+$(cat $DIR/$DATE)" > $DIR/$DATE
+  #else
+    #openscratchpad
+
+    #exit 0
+  fi
+  OpenScratchpad
+
+  exit 0
+}
 
 GiveReminder(){
   if test -f "$DIR/$DATE"; then
