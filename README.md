@@ -25,7 +25,7 @@ You may also retrieve your scratchpads using the CLI, by simply tying `sr -d day
 
 You don't have to specify an exact date. If you just specify a month, you will be taken to the directory of the current year's month. e.g `sr -d dec` --> equivalent to `cd /path/to/current/year/month`
 
-Likewise, specifying a date and month, will take you to the current year's month and day. e.g. `s -d 10 dec` --> `vim /path/to/current/year/month/10-12-YYYY`
+Likewise, specifying a date and month, will take you to the current year's month and day. e.g. `sr -d 10 dec` --> `vim /path/to/current/year/month/10-12-YYYY`
 
 ## Recommended dependencies:
 - Goyo plugin for vim, to declutter the scratchpad environment.
