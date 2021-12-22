@@ -22,7 +22,8 @@ TEMP="/tmp/$YESTERDAY.tmp"
 PERM="$HOME/.local/share/scratchpad/data"
 touch "$TEMP"
 CURR_MONTH=$(date +"%B")
-DIR=$HOME/.local/share/scratchpad/$CURR_MONTH
+CURR_YEAR=$(date +"%Y")
+DIR=$HOME/.local/share/scratchpad/$CURR_YEAR/$CURR_MONTH
 REMINDER=$(grep -E "\[\+\]$" "$DIR/$YESTERDAY" 2>/dev/null)
 PERSISTENCE=$(grep -E "\[\!\]$" "$DIR/$YESTERDAY" 2>/dev/null)
 echo "$PERSISTENCE" > $PERM

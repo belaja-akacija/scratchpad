@@ -71,26 +71,39 @@ OpenDate()
 
 OpenDir()
 {
-  if [[ $DAY =~ [[:digit:]] ]]; then
-    nvim -c "Goyo" "$DIR/$1/$2"*
-  else
-    cd "$DIR/$1"
-    exec zsh
+  # if the year is not present, then assume the current year
+  if [[ -z "$3" ]]; then
+    # open the year's dir, then check the rest of the dates
+    CURR_YEAR=$(date +"%Y")
+    if [[ -z "$DAY"  ]]; then
+      cd "$DIR/$CURR_YEAR/$1"
+      exec zsh
+    else
+    nvim -c "Goyo" "$DIR/$CURR_YEAR/$1/$2"*
+    fi
+  elif [[ $3 =~ [[:digit:]] ]]; then
+    # Do the previous logic, but with the specified year
+    if [[ -z "$DAY"  ]]; then
+      cd "$DIR/$3/$1"
+      exec zsh
+    else
+      nvim -c "Goyo" "$DIR/$3/$1/$2"*
+    fi
   fi
 }
 
 Help()
 {
-        echo "
-     scratchpad retriever -- ($VERSION)
-         Author: Belaja-akacija
-                  2021"
-        echo
-        echo "      Usage: s [OPTION]
-        "
-        echo "  +  -d   #-----------> retrieve by date"
-        echo "  +  -h   #-----------> this help"
-        echo
+  echo "
+  scratchpad retriever -- ($VERSION)
+  Author: Belaja-akacija
+  2021"
+  echo
+  echo "      Usage: s [OPTION]
+  "
+  echo "  +  -d   #-----------> retrieve by date"
+  echo "  +  -h   #-----------> this help"
+  echo
 }
 
 while getopts "d:h" flag
