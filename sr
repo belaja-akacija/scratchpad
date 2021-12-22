@@ -94,12 +94,9 @@ OpenDir()
 
 Help()
 {
-  echo "
-  scratchpad retriever -- ($VERSION)
-  Author: Belaja-akacija
-  2021"
+  echo -e "\n\tScratchpad Retriever -- ($VERSION)\n\t  Author: Belaja-akacija\n\t\t  2021"
   echo
-  echo "      Usage: s [OPTION]
+  echo -e "  Usage: sr [ OPTION ] [[ DAY ] [ MONTH ] [ YEAR ]]
   "
   echo "  +  -d   #-----------> retrieve by date"
   echo "  +  -h   #-----------> this help"
