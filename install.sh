@@ -20,7 +20,7 @@ DEP_CHECK(){
 
 INSTALLER(){
   install -v scratchpad $HOME/bin/
-  install -v s $HOME/bin/
+  install -v sr $HOME/bin/
 }
 
 DIR_CHECK()
