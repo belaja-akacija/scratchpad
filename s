@@ -1,7 +1,10 @@
 #!/bin/bash
 
-## suckless build config chooser
+## scratchpad retriever
 ## author: belaja-akacija
+## description: retrieves your scratchpads by date lol
+## TODO: filter scratchpads and concat them, then display the full months scratchpads in one document.
+## Should it open open in vim or just use cat? :THONK:
 
 VERSION="1.0"
 DIR="$HOME/.local/share/scratchpad"
@@ -87,9 +90,6 @@ Help()
         "
         echo "  +  -d   #-----------> retrieve by date"
         echo "  +  -h   #-----------> this help"
-        #echo "  +  -s   #-----------> st"
-        #echo "  +  -b   #-----------> dwmblocks"
-        #echo "  +  -m   #-----------> dmenu"
         echo
 }
 
