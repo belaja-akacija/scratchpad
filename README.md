@@ -21,9 +21,9 @@ If you don't replace the ```?``` back to a ```+```, the reminder will not show u
 That's basically it, so far!
 
 ### CLI Tool
-You may also retrieve your scratchpads using the CLI, by simply tying `s -d day month year`.
+You may also retrieve your scratchpads using the CLI, by simply tying `sr -d day month year`.
 
-You don't have to specify an exact date. If you just specify a month, you will be taken to the directory of the current year's month. e.g `s -d dec` --> equivalent to `cd /path/to/current/year/month`
+You don't have to specify an exact date. If you just specify a month, you will be taken to the directory of the current year's month. e.g `sr -d dec` --> equivalent to `cd /path/to/current/year/month`
 
 Likewise, specifying a date and month, will take you to the current year's month and day. e.g. `s -d 10 dec` --> `vim /path/to/current/year/month/10-12-YYYY`
 
