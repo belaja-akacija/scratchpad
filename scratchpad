@@ -14,6 +14,7 @@
 ## Add persistence of reminders, denoted by [!] at the end of an entry
 ## Maybe be able to chain together flags, something like e.g. [!*] -- pin this reminder to the very top; and other subtle quality of life fixes.
 ## Check the state of the header in the current scratchpad and compare it to the previous day's reminders. Overwrite if doesn't match.
+## Add case to return a particular date
 
 DATE=$(date +"%d-%m-%Y")
 YESTERDAY=$(date +"%d-%m-%Y" --date="yesterday")
