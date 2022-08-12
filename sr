@@ -96,7 +96,8 @@ Help()
 {
   echo -e "\n\tScratchpad Retriever -- ($VERSION)\n\t  Author: Belaja-akacija\n\t\t  2021"
   echo
-  echo -e "  Usage: sr [ OPTION ] [[ DAY ] [ MONTH ] [ YEAR ]]
+  echo -e "  Usage: sr [ OPTION ] [[ DAY ] [ MONTH ] [ YEAR ]]"
+  echo -e "  Month should be written in latin letters. E.x. 'January' --> 'jan'
   "
   echo "  +  -d   #-----------> retrieve by date"
   echo "  +  -h   #-----------> this help"
